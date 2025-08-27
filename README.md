@@ -77,38 +77,46 @@ rsaKeyPair = await crypto.subtle.generateKey(
     true,
     ["encrypt", "decrypt"]
 );
-Para cifrar, o texto é criptografado com crypto.subtle.encrypt usando a chave pública.
-Para decifrar, o texto é descriptografado com crypto.subtle.decrypt usando a chave privada.
+   - O texto é convertido em bytes (TextEncoder) e criptografado com crypto.subtle.encrypt.
+   - Para descriptografar, usa-se crypto.subtle.decrypt com a mesma chave e IV (vetor de inicialização).
+   - O resultado é convertido para Base64 para facilitar transporte em texto.
+
+## Criptografia assimétrica (RSA-OAEP)
+
+O RSA usa duas chaves diferentes:
+- Chave pública para criptografar.
+- Chave privada para descriptografar.
+- O par de chaves é gerado assim:
+  ```javascript
+  rsaKeyPair = await crypto.subtle.generateKey(
+      {
+        name: "RSA-OAEP",
+        modulusLength: 2048,
+        publicExponent: new Uint8Array([1, 0, 1]),
+        hash: "SHA-256",
+    },
+      true,
+      ["encrypt", "decrypt"]
+  );
+  `
+O texto é criptografado com crypto.subtle.encrypt usando a chave pública e descriptografado com crypto.subtle.decrypt usando a chave privada.
 
 ## Exportação e importação de chaves
-Para testar em diferentes navegadores, o código inclui botões para exportar e importar as chaves RSA:
-Exportar: converte as chaves para Base64 e baixa um arquivo rsa_keys.json.
-Importar: lê esse arquivo e recria as chaves usando crypto.subtle.importKey.
+- Exportar: baixa rsa_keys.json contendo as chaves codificadas em Base64.
+- Importar: lê o arquivo e recria as chaves no navegador com crypto.subtle.importKey.
 
 ## Interface HTML
-Tudo é feito em um único arquivo index.html.
 
-Cada botão está ligado a uma função JavaScript que:
-
-Lê o texto digitado.
-
-Executa a criptografia ou descriptografia.
-
-Mostra o resultado no campo de saída.
+   - O projeto é todo feito em um único arquivo index.html.
+   - Cada botão chama uma função JS que lê o texto, executa a criptografia ou descriptografia e exibe o resultado na tela.
 
 Resumindo
-AES: mais rápido, mas precisa que a chave secreta seja compartilhada de forma segura.
-RSA: não precisa compartilhar a chave privada, mas é mais lento.
-A Web Crypto API garante que toda a criptografia é feita no próprio navegador, sem enviar dados para servidores.
+- AES: rápido, mas requer compartilhamento seguro da chave.
+- RSA: não exige compartilhar a chave privada, mas é mais lento.
+- Toda criptografia ocorre no navegador, sem envio para servidores.
+- Tecnologias usadas
+- HTML5 – interface
+- CSS3 – estilo básico
+- JavaScript (Web Crypto API) – criptografia nativa no navegador
 
-Tecnologias usadas
-HTML5 – interface.
-CSS3 – estilo básico.
-JavaScript (Web Crypto API) – criptografia nativa no navegador.
 
-Observações
-Este projeto é didático.
-Para uso real em produção:
-Não exponha chaves privadas.
-Utilize HTTPS para segurança.
-Armazene chaves e dados criptografados de forma segura.
