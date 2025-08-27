@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criptografia Simétrica e Assimétrica</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Criptografia no Navegador</h1>
+
+    <textarea id="inputText" placeholder="Digite o texto aqui"></textarea>
+    <br>
+    <button onclick="encryptSymmetric()">Criptografar (AES)</button>
+    <button onclick="decryptSymmetric()">Descriptografar (AES)</button>
+    <br><br>
+    <button onclick="generateRSAKeys()">Gerar Chaves RSA</button>
+    <button onclick="encryptAsymmetric()">Criptografar (RSA)</button>
+    <button onclick="decryptAsymmetric()">Descriptografar (RSA)</button>
+    <br><br>
+    <button onclick="exportRSAKeys()">Exportar Chaves RSA</button>
+    <input type="file" onchange="importRSAKeys(this.files[0])">
+
+    <h2>Resultado:</h2>
+    <pre id="output"></pre>
+
+    <script src="script.js"></script>
+</body>
+</html>
