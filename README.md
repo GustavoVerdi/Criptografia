@@ -58,9 +58,7 @@ O projeto usa a **Web Crypto API** do JavaScript, que permite realizar criptogra
       ["encrypt", "decrypt"]
   );
 Para cifrar, o texto é convertido em bytes (TextEncoder) e criptografado com crypto.subtle.encrypt.
-
 Para decifrar, é usado crypto.subtle.decrypt com a mesma chave e o mesmo IV (vetor de inicialização).
-
 O resultado é convertido para Base64 para facilitar o transporte em texto.
 
 ## Criptografia assimétrica (RSA-OAEP)
