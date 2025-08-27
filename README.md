@@ -87,9 +87,13 @@ Importar: lê esse arquivo e recria as chaves usando crypto.subtle.importKey.
 
 ## Interface HTML
 Tudo é feito em um único arquivo index.html.
+
 Cada botão está ligado a uma função JavaScript que:
+
 Lê o texto digitado.
+
 Executa a criptografia ou descriptografia.
+
 Mostra o resultado no campo de saída.
 
 Resumindo
